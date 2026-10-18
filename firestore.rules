@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Remplacez l'UID ci-dessous par l'UID du seul compte administrateur Firebase Auth.
+    function admin() {
+      return request.auth != null && request.auth.uid == 'REMPLACER_UID_ADMIN';
+    }
+    match /produits/{id} {
+      allow read: if true;
+      allow create, update, delete: if admin();
+    }
+    match /annonces/{id} {
+      allow read: if resource.data.publie == true || admin();
+      allow create, update, delete: if admin();
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}
