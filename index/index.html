@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SCOOPS OWEDJO - Boutique</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f8f5ee;
+            color: #333;
+        }
+
+        header {
+            background: #285c38;
+            color: white;
+            text-align: center;
+            padding: 35px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background: #193d25;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 10px;
+        }
+
+        .accueil {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .produits {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 30px;
+        }
+
+        .produit {
+            background: white;
+            width: 280px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px #ddd;
+        }
+
+        .produit img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .prix {
+            color: #285c38;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 70px;
+            padding: 8px;
+            margin: 10px;
+        }
+
+        button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #128C7E;
+        }
+
+        footer {
+            background: #193d25;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>SCOOPS OWEDJO</h1>
+    <p>La beauté naturelle du beurre de karité</p>
+</header>
+
+<nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#produits">Produits</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<section class="accueil" id="accueil">
+    <h2>Bienvenue dans notre boutique</h2>
+    <p>
+        Découvrez notre beurre de karité naturel,
+        disponible à Abidjan.
+    </p>
+</section>
+
+<section class="produits" id="produits">
+
+    <div class="produit">
+
+        <img src="karite1.jpg"
+             alt="Beurre de karité naturel">
+
+        <h3>Beurre de karité naturel</h3>
+
+        <p>Un soin naturel pour votre peau.</p>
+
+        <p class="prix">2 500 FCFA</p>
+
+        <label>Quantité :</label>
+        <input type="number"
+               id="quantite1"
+               value="1"
+               min="1">
+
+        <br>
+
+        <button onclick="commander(
+            'Beurre de karité naturel',
+            2500,
+            'quantite1'
+        )">
+            Commander sur WhatsApp
+        </button>
+
+    </div>
+
+    <div class="produit">
+
+        <img src="karite2.jpg"
+             alt="Beurre de karité premium">
+
+        <h3>Beurre de karité premium</h3>
+
+        <p>Un beurre de karité de qualité.</p>
+
+        <p class="prix">5 000 FCFA</p>
+
+        <label>Quantité :</label>
+        <input type="number"
+               id="quantite2"
+               value="1"
+               min="1">
+
+        <br>
+
+        <button onclick="commander(
+            'Beurre de karité premium',
+            5000,
+            'quantite2'
+        )">
+            Commander sur WhatsApp
+        </button>
+
+    </div>
+
+</section>
+
+<footer id="contact">
+    <h3>Contactez-nous</h3>
+    <p>Abidjan - Côte d'Ivoire</p>
+    <p>SCOOPS OWEDJO © 2026</p>
+</footer>
+
+<script>
+
+    // Remplacer par votre numéro WhatsApp
+    // Exemple : 2250749190670
+    const telephone = "2250749190670";
+
+    function commander(produit, prix, idQuantite) {
+
+        const quantite = Number(
+            document.getElementById(idQuantite).value
+        );
+
+        if (!Number.isInteger(quantite) || quantite < 1) {
+            alert("Veuillez choisir une quantité valide.");
+            return;
+        }
+
+        const total = prix * quantite;
+
+        const message =
+            "Bonjour SCOOPS OWEDJO !\n" +
+            "Je souhaite commander :\n\n" +
+            "Produit : " + produit + "\n" +
+            "Quantité : " + quantite + "\n" +
+            "Prix total : " + total + " FCFA\n\n" +
+            "Merci de me confirmer la disponibilité.";
+
+        const url =
+            "https://wa.me/" +
+            telephone +
+            "?text=" +
+            encodeURIComponent(message);
+
+        window.open(url, "_blank");
+    }
+
+</script>
+
+</body>
+</html>
